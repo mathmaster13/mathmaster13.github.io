@@ -1,1 +1,1 @@
-just a repo for projects that don't have a dedicated repo
+a homepage. don't know what will be here, but we will see :)

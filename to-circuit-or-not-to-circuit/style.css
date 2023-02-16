@@ -1,0 +1,4 @@
+p {
+    /* all of my paragraphs are outputs, so they should preserve whitespace */
+    white-space: pre;
+}

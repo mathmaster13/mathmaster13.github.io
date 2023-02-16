@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Circuit or Not To Circuit?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>To Circuit or Not To Circuit?</h1>
+Circuits in remote matches require very specific patterns, and sometimes it is more worth it to not score them at all!
+This is a tool for determining whether you should score a circuit or not in a remote match.
+<br>
+You can either input the amount of cones you can score to compare circuit and non-circuit scoring,
+or find the threshold for when going for a circuit is not worth it.
+<br>
+<b>Note:</b> this tool assumes that all cones are scored in teleop. Auto support will come soon.
+
+<h3>What junctions are you capable of scoring in?</h3>
+Note that it is assumed that you can score cones in terminals, since those are required for ALL circuits.
+<br>
+<input disabled type="checkbox" id="terminal-checkbox" checked>
+<label for="terminal-checkbox">Terminals</label>
+<br>
+<input type="checkbox" id="ground-checkbox" checked>
+<label for="ground-checkbox">Ground Junctions</label>
+<br>
+<input type="checkbox" id="low-checkbox" checked>
+<label for="low-checkbox">Low Junctions</label>
+<br>
+<input type="checkbox" id="medium-checkbox" checked>
+<label for="medium-checkbox">Medium Junctions</label>
+<br>
+<input type="checkbox" id="high-checkbox" checked>
+<label for="high-checkbox">High Junctions</label>
+<br>
+
+<h3>What circuit pattern would you like to test?</h3>
+<label for="circuit-pattern">Circuit Pattern (1-6)</label>
+<input type="number" min="1" max="6" step="1" id="circuit-pattern" oninput="(validity.valid) || (value='');">
+
+<h2>Is it better to score a circuit or not?</h2>
+<label for="cone-amount">How many cones can you score in teleop? (optional)</label>
+<input type="number" min="1" max="30" step="1" id="cone-amount" oninput="(validity.valid) || (value='');">
+<br>
+<button id="submit">Submit</button>
+<p id="err"></p>
+<div id="specific-scoring" style="display: none">
+    <p id="circuit-score"></p>
+    <p id="non-circuit-score"></p>
+    <h3>One method to achieve the best score:</h3>
+    <p id="best-score"></p>
+</div>
+
+<div id="general-scoring" style="display: none">
+    <h3>In general:</h3>
+    <p id="in-general"></p>
+</div>
+
+<script src="Circuits.js"></script>
+</body>
+</html>

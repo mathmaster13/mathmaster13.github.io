@@ -220,7 +220,7 @@ document.getElementById('submit').onclick = () => {
     handleSpecificInfo(patternIdx, allowedLocations);
     // general information
     const [threshold, canBeEqual] = noCircuitThreshold(patternIdx, allowedLocations);
-    inGeneral.innerText = `For this pattern and these constraints, scoring a circuit is ${threshold == null ? "always most effective" :
+    inGeneral.innerText = `For this pattern and these constraints, scoring a circuit is ${threshold == null ? "always most effective." :
         `less effective if you can score more than ${threshold + (canBeEqual ? 1 : 0)} cones.`}${canBeEqual ?
         ` If you score exactly ${threshold} cones, the scores will be equal.` : ""}`;
 };
@@ -237,7 +237,9 @@ function handleSpecificInfo(patternIdx, allowedLocations) {
     }
     catch (e) {
         const badConstraints = e instanceof ImpossibleConstraintsException;
-        errorOutput = [e.msg, badConstraints];
+        if (errorOutput == null || badConstraints) {
+            errorOutput = [e.msg, badConstraints];
+        }
     }
     if (errorOutput != null)
         return error(...errorOutput);

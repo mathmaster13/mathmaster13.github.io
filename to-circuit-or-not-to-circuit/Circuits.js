@@ -230,6 +230,8 @@ function handleSpecificInfo(patternIdx, allowedLocations) {
     let errorOutput = null;
     if (coneAmount === "")
         errorOutput = ["No cone amount was supplied. Information about this pattern in general is still available.", false];
+    else if (coneAmount == 0)
+        errorOutput = ["Haha your robot sucks", false];
     // check if specific information is available
     let circuitPattern;
     try {

@@ -44,7 +44,7 @@
       <label for="font-picker">Select a TTF or OTF file:</label>
 
       <input type="file" accept=".ttf,.otf" id="font-picker" name="font-picker" />
-      <button onClick="onSubmit()">Submit</button>
+      <button onClick="await onSubmit()">Submit</button>
        
       <p id="error" display="none">No file was selected. Please try again.</p>
     </div>
@@ -59,7 +59,7 @@
     reader.onload = () => resolve(reader.result.replace(/data:*\/*;base64,/), "");
     reader.onerror = reject;
 });
-       function onSubmit() {
+       async function onSubmit() {
             const files = input.files;
             if (files.length === 0) {
                 errorText.style.display = "block";

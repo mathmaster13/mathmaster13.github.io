@@ -101,7 +101,7 @@
 </array>
 </dict>
 </plist>`; // only one file for now.
-            saveXml("profile.mobileconfig", text);
+            save("profile.mobileconfig", text);
         }
 function uuidv4() { // StackOverflow
   if (window.isSecureContext) return crypto.randomUUID();
@@ -110,19 +110,22 @@ function uuidv4() { // StackOverflow
   );
 }
 
-function saveXml(filename, data) { // Stack Overflow
+function save(filename, data) { // Stack Overflow
     if (window.navigator.msSaveOrOpenBlob) {
-        const blob = new Blob([data], {type: 'text/xml'});
+        const blob = new Blob([data], {type: 'text/plain'});
         window.navigator.msSaveBlob(blob, filename);
     }
     else {
-        const elem = window.document.createElement('a');
-        elem.href = "data:text/plain;charset=utf-8," + window.encodeURIComponent(data);
-        elem.download = filename;
+        const elem = document.createElement('a');
+        const file = new File([data], filename);
+        const url = URL.createObjectURL(file);
+        elem.href = url;
+        elem.download = file.name;
         elem.style = "display: none";
         document.body.appendChild(elem);
         elem.click();
-        a.remove();
+        document.body.removeChild(elem);
+        // window.URL.revokeObjectURL(url);
     }
 }
     </script>

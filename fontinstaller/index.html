@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Begin Jekyll SEO tag v2.7.1 -->
-<title>welcome | mathmaster13.github.io</title>
+<title>iOS Font Installer</title>
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="welcome" />
+<meta property="og:title" content="iOS Font Installer" />
 <meta property="og:locale" content="en_US" />
-<link rel="canonical" href="https://mathmaster13.github.io/" />
-<meta property="og:url" content="https://mathmaster13.github.io/" />
+<link rel="canonical" href="https://mathmaster13.github.io/fontinstaller/" />
+<meta property="og:url" content="https://mathmaster13.github.io/fontinstaller/" />
 <meta property="og:site_name" content="mathmaster13.github.io" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="welcome" />
+<meta property="twitter:title" content="iOS Font Installer" />
 <script type="application/ld+json">
-{"headline":"welcome","url":"https://mathmaster13.github.io/","@type":"WebSite","name":"mathmaster13.github.io","@context":"https://schema.org"}</script>
+{"headline":"iOS Font Installer","url":"https://mathmaster13.github.io/fontinstaller","@type":"WebSite","name":"mathmaster13.github.io","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
     <link rel="stylesheet" href="/assets/css/style.css?v=">
@@ -67,7 +67,7 @@
             }
             errorText.style.display = "none";
             const profileID = uuidv4();
-            let text = String.raw`<?xml version="1.0" encoding="UTF-8"?>
+            const text = String.raw`<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
@@ -100,7 +100,8 @@
 </dict>
 </array>
 </dict>
-</plist>` // only one file for now.
+</plist>`; // only one file for now.
+            saveXml("profile.mobileconfig", text);
         }
 function uuidv4() { // StackOverflow
   if (window.isSecureContext) return crypto.randomUUID();

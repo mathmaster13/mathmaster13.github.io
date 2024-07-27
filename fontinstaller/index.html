@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>welcome | mathmaster13.github.io</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="welcome" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="https://mathmaster13.github.io/" />
+<meta property="og:url" content="https://mathmaster13.github.io/" />
+<meta property="og:site_name" content="mathmaster13.github.io" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="welcome" />
+<script type="application/ld+json">
+{"headline":"welcome","url":"https://mathmaster13.github.io/","@type":"WebSite","name":"mathmaster13.github.io","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1>font installer</h1>
+
+      <p>This is a tool to install a custom font on iOS without any third-party apps. It manually implements <a href="https://lontar.eu/en/notes/installing-fonts-on-ios/index.html">this</a>; I did not invent this idea.</p>
+
+      <p>A difference from this website, though, is that my profiles are not signed. iOS will warn you, but it is fine—you can view the source code and verify it only does exactly what you could have done yourself.</p>
+
+      <label for="font-picker">Select a TTF or OTF file:</label>
+
+      <input type="file" accept=".ttf,.otf" id="font-picker" name="font-picker" />
+      <button onClick="onSubmit()">Submit</button>
+       
+      <p id="error" display="none">No file was selected. Please try again.</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.0/anchor.min.js" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+    <script>
+        const input = document.getElementById("font-picker");
+        const errorText = document.getElementById("error");
+        const toBase64 = file => new Promise((resolve, reject) => { // StackOverflow
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.replace(/data:*\/*;base64,/), "");
+    reader.onerror = reject;
+});
+       function onSubmit() {
+            const files = input.files;
+            if (files.length === 0) {
+                errorText.style.display = "block";
+                return;
+            }
+            errorText.style.display = "none";
+            const profileID = uuidv4();
+            let text = String.raw`<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+<key>PayloadDisplayName</key>
+<string>Local Font</string>
+<key>PayloadIdentifier</key>
+<string>io.github.mathmaster13.local.${profileID}</string>
+<key>PayloadRemovalDisallowed</key>
+<false/>
+<key>PayloadType</key>
+<string>Configuration</string>
+<key>PayloadUUID</key>
+<string>${profileID}</string>
+<key>PayloadVersion</key>
+<integer>1</integer>
+<key>PayloadContent</key>
+<array>
+<dict>
+<key>PayloadIdentifier</key>
+<string>io.github.mathmaster13.local.${payloadID}.font</string>
+<key>PayloadType</key>
+<string>com.apple.font</string>
+<key>PayloadUUID</key>
+<string>${uuidv4()}</string>
+<key>PayloadVersion</key>
+<integer>1</integer>
+<key>Font</key>
+<data>${await toBase64(file)}
+</data>
+</dict>
+</array>
+</dict>
+</plist>` // only one file for now.
+        }
+function uuidv4() { // StackOverflow
+  if (window.isSecureContext) return crypto.randomUUID();
+  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
+  );
+}
+
+function saveXml(filename, data) { // Stack Overflow
+    if (window.navigator.msSaveOrOpenBlob) {
+        const blob = new Blob([data], {type: 'text/xml'});
+        window.navigator.msSaveBlob(blob, filename);
+    }
+    else {
+        const elem = window.document.createElement('a');
+        elem.href = "data:text/plain;charset=utf-8," + window.encodeURIComponent(data);
+        elem.download = filename;
+        elem.style = "display: none";
+        document.body.appendChild(elem);
+        elem.click();
+        a.remove();
+    }
+}
+    </script>
+  </body>
+</html>
+ 

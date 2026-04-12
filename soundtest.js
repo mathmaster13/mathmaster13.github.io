@@ -3,6 +3,25 @@ const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
 // create Oscillator node
 const oscillator = audioCtx.createOscillator();
 
+addEventListener("keydown", (event) => {
+    switch (event.key) {
+        case "ArrowLeft":
+            decIndex();
+            break;
+        case "ArrowRight":
+            incIndex();
+            break;
+        case "n":
+        case "N":
+            array = ntsc;
+            break;
+        case "p":
+        case "P":
+            array = pal;
+            break;
+    }
+)
+
 oscillator.type = 'square';
 oscillator.frequency.value = 220; // value in hertz
 oscillator.connect(audioCtx.destination);

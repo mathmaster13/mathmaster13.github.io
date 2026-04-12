@@ -87,6 +87,9 @@ const pal = [
 
 addEventListener("keydown", (event) => {
     switch (event.key) {
+        case "q":
+            oscillator.start();
+            break;
         case "ArrowLeft":
             decIndex();
             break;
@@ -113,7 +116,6 @@ addEventListener("keydown", (event) => {
 oscillator.type = 'square';
 oscillator.frequency.value = 0; // value in hertz
 oscillator.connect(audioCtx.destination);
-oscillator.start();
 
 var index = 0;
 var array = ntsc;

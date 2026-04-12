@@ -96,23 +96,24 @@ addEventListener("keydown", (event) => {
         case "n":
         case "N":
             array = ntsc;
-            oscillator.start();
+            playPeriod(array[index]);
             break;
         case "p":
         case "P":
             array = pal;
-            oscillator.start();
+            playPeriod(array[index]);
             break;
       case "s":
       case "S":
-        oscillator.stop();
+        oscillator.frequency.value = 0;
         break;
     }
 });
 
 oscillator.type = 'square';
-oscillator.frequency.value = 220; // value in hertz
+oscillator.frequency.value = 0; // value in hertz
 oscillator.connect(audioCtx.destination);
+oscillator.start();
 
 var index = 0;
 var array = ntsc;

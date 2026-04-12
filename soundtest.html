@@ -62,12 +62,11 @@ addEventListener("keydown", (event) => {
         oscillator.stop();
         break;
     }
-}
+});
 
 oscillator.type = 'square';
 oscillator.frequency.value = 220; // value in hertz
 oscillator.connect(audioCtx.destination);
-oscillator.start();
 
 var index = 0;
 var array = ntsc;

@@ -87,6 +87,7 @@ function validateNumberSize(input, size) {
   }
     const errors = document.getElementById("errors");
     async function onSubmit() {
+        packs.sort((a, b) => parseInt(b.score.value) - parseInt(a.score.value));
         const bytes = new Array(4);
         bytes[0] = new Uint8Array([0x37, 0x64, 0x4B, 0xD2]);
         for (const i of [1, 2, 3]) {

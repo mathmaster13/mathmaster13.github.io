@@ -43,9 +43,7 @@ class HighScore {
         return output;
     }
 }
-ƒ (size) {
-    return this.match(new RegExp(`.{1,${size}}`, 'g'));
-}
+
 const CHARACTERS = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,/()❤️.!?-";
 
 function isStringClean(input) {

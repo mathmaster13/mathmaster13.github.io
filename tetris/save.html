@@ -92,10 +92,10 @@ function validateNumberSize(input, size) {
         bytes[0] = new Uint8Array([0x37, 0x64, 0x4B, 0xD2]);
         for (const i of [0, 1, 2]) {
             bytes[i + 1] = (new HighScore(packs[i].name.value,
-                                     parseInt(packs[i].score.value), 
-                                     parseInt(packs[i].lines.value),
-                                     parseInt(packs[i].start.value),
-                                     parseInt(packs[i].end.value))).toUByteArray()
+                                     parse(packs[i].score.value), 
+                                     parse(packs[i].lines.value),
+                                     parse(packs[i].start.value),
+                                     parse(packs[i].end.value))).toUByteArray()
         }
         const allTogether = concatenate(bytes);
         const buffer = new ArrayBuffer(0x1FFF);

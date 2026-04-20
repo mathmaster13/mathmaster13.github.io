@@ -1,7 +1,7 @@
 const CHARACTERS = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,/()❤️.!?-";
 
 function isStringClean(input) {
-    for (char of CHARACTERS)
+    for (char of input.toUpperCase())
         if (!CHARACTERS.includes(char)) 
             return false;
     return true;

@@ -55,22 +55,55 @@
 
   for (const i of [1, 2, 3]) {
     document.getElementById(`pack${i}`).innerHTML = `<input type="text" placeholder="Name #${i}" oninput="validateName(this)" id="name${i}">
-    <input type="number" placeholder="Highscore #${i}" min="0" step="1" max="99999999" oninput="validateNumber(this)" id="score${i}">
-    <input type="number" placeholder="Line count #${i}" min="0" step="1" max="999" oninput="validateNumber(this)" id="lines${i}">
-    <input type="number" placeholder="Starting level #${i}" min="0" step="1" max="255" oninput="validateNumber(this)" id="start${i}">
-    <input type="number" placeholder="Ending level #${i}" min="0" step="1" max="255" oninput="validateNumber(this)" id="end${i}">`;
+    <input type="number" placeholder="Highscore #${i}" min="0" step="1" max="99999999" oninput="validateNumber(this, 8)" id="score${i}">
+    <input type="number" placeholder="Line count #${i}" min="0" step="1" max="999" oninput="validateNumber(this, 3)" id="lines${i}">
+    <input type="number" placeholder="Starting level #${i}" min="0" step="1" max="255" oninput="validateNumberSize(this)" id="start${i}">
+    <input type="number" placeholder="Ending level #${i}" min="0" step="1" max="255" oninput="validateNumberSize(this)" id="end${i}">`;
+
+      packs[i - 1] = {
+          name: document.getElementById(`name${i}`),
+          score: document.getElementById(`score{i}`),
+          lines: document.getElementById(`lines${i}`),
+          start: document.getElementById(`start${i}`),
+          end: document.getElementById(`end${i}`)
+      };
   }
 
   function validateName(input) {
     if (this.value.length > 8) this.value =  this.value.slice(0, 8);
     this.value = this.value.replace(/[^a-zA-Z0-9,\/()❤️.!?-]/g, '');
   }
-  function validateNumber(input) {
+  function validateNumber(input, length) {
+    if (this.value.length > length) this.value =  this.value.slice(0, length);
     input.value = input.value.replace(/[^0-9]/g, '');
+  }
+function validateNumberSize(input) {
+    const v = input.value.slice(0, 3);
+    if (parseInt(v) > 255) {
+        input.value = input.value.slice(0, 2);
+    } else if (this.value > 255) {
+        input.value = v;
+    }
   }
     const errors = document.getElementById("errors");
     async function onSubmit() {
-        
+        const bytes = new Array(4);
+        bytes[0] = new Uint8Array([0x37, 0x64, 0x4B, 0xD2]);
+        for (const i of [1, 2, 3]) {
+            bytes[i] = (new Highscore(packs[i].name.value,
+                                     parseInt(packs[i].score.value), 
+                                     parseInt(packs[i].lines.value),
+                                     parseInt(packs[i].start.value),
+                                     parseInt(packs[i].end.value))).toUByteArray()
+        }
+        const allTogether = concatenate(bytes);
+        const buffer = new ArrayBuffer(0x1FFF);
+        const array = new Uint8Array(buffer);
+        for (let i = 0; i < allTogether.length; i++) {
+            array[0xA00 + i] = allTogether[i];
+        }
+        const file = new BinFile(buffer);
+        file.setName("tetris"); file.setExtension("sav"); file.save();
     }
 </script>
 </body>

@@ -41,7 +41,7 @@
   <div id="pack2"></div>
   <div id="pack3"></div>
 
-    <input type="button" id="save" name="save" onchange="onSubmit()">Save Highscores</input>
+    <button type="button" id="save" name="save" onclick="onSubmit()">Save Highscores</input>
 
     <div id="errors"></div>
 </div>
@@ -90,7 +90,7 @@ function validateNumberSize(input, size) {
         const bytes = new Array(4);
         bytes[0] = new Uint8Array([0x37, 0x64, 0x4B, 0xD2]);
         for (const i of [1, 2, 3]) {
-            bytes[i] = (new Highscore(packs[i].name.value,
+            bytes[i] = (new HighScore(packs[i].name.value,
                                      parseInt(packs[i].score.value), 
                                      parseInt(packs[i].lines.value),
                                      parseInt(packs[i].start.value),

@@ -44,8 +44,6 @@ class HighScore {
     }
 }
 
-const CHARACTERS = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,/()❤️.!?-";
-
 function isStringClean(input) {
     for (char of CHARACTERS)
         if (!CHARACTERS.includes(char)) 
@@ -89,7 +87,7 @@ class HighScore {
                      lines = 0,
                      startLevel = 0,
                      endLevel = 0) {
-        this.name = name1.padEnd(8, ' ');
+        this.name = name1.padEnd(8, ' ').toUpperCase();
         this.score = score; this.lines = lines;
         this.startLevel = startLevel; this.endLevel = endLevel;
     };

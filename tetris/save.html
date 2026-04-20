@@ -79,7 +79,7 @@
   }
 function validateNumberSize(input, size) {
     const v = input.value.slice(0, 3);
-    if (parseInt(v) > 255) {
+    if (parse(v) > 255) {
         input.value = input.value.slice(0, 2);
     } else if (input.value > 255) {
         input.value = v;
@@ -87,7 +87,7 @@ function validateNumberSize(input, size) {
   }
     const errors = document.getElementById("errors");
     async function onSubmit() {
-        packs.sort((a, b) => parseInt(b.score.value) - parseInt(a.score.value));
+        packs.sort((a, b) => parse(b.score.value) - parse(a.score.value));
         const bytes = new Array(4);
         bytes[0] = new Uint8Array([0x37, 0x64, 0x4B, 0xD2]);
         for (const i of [0, 1, 2]) {
@@ -105,6 +105,11 @@ function validateNumberSize(input, size) {
         }
         const file = new BinFile(buffer);
         file.setName("tetris"); file.setExtension("sav"); file.save();
+    }
+
+    function parse(str) {
+        if (str === "") return 0;
+        return parseInt(str);
     }
 </script>
 </body>
